@@ -1,6 +1,6 @@
-from http import HttpClient, Url
-from utils import Utils
-from enums import Type, Category, Difficulty
+from .http import HttpClient, Url
+from .utils import Utils
+from .enums import Type, Category, Difficulty
 
 
 class Client:
@@ -10,12 +10,12 @@ class Client:
         self.use_token = use_token
 
         self.utils = Utils()
-        self.http = HttpClient(self.utils, use_token)
+        self.http = HttpClient(self.utils, self.use_token)
 
     async def request(self, _type: Type, amount: int = None, category: Category = None, difficulty: Difficulty = None):
         """"Returns the given amount of trivia questions."""
 
-        url = Url(_type, amount, category, difficulty)
+        url = Url(False, _type, amount, category, difficulty)
 
         return await self.http.request(url)
 
