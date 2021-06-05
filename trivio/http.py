@@ -9,7 +9,13 @@ class Url:
     Base_url = "https://opentdb.com/api.php?encode=base64"
     TOKEN_URL = "https://opentdb.com/api_token.php"
 
-    def __init__(self, is_command: bool, _type: Type, amount: int = None, category: Category = None, difficulty: Difficulty = None):
+    def __init__(self,
+                 is_command: bool,
+                 _type: Type,
+                 amount: int = None,
+                 category: Category = None,
+                 difficulty: Difficulty = None):
+
         self.is_command = is_command
         self._type = _type
         self.amount = amount
@@ -66,7 +72,12 @@ class HttpClient:
         async with self._session.request("get", _url) as r:
             data = await r.json()
 
-        if data["response_code"] in (3, 4):
+        #Cheking the response codes from the api
+        if data["response_code"] == 1:
+            pass #ToDo raise No Results Could not return results. The API doesn't have enough questions for your query.
+        elif data["response_code"] == 2:
+            pass #ToDo raise  Invalid Parameter Contains an invalid parameter. Arguments passed in aren't valid.
+        elif data["response_code"] in (3, 4):
             self.token = await self.get_token()
             return await self.request(_url)
 
@@ -75,8 +86,6 @@ class HttpClient:
             return data
 
         return self.utils.build_dict(data)
-
-
 
     async def close(self):
         # Close the ClientSession if existing
