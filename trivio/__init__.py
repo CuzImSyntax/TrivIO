@@ -1,4 +1,2 @@
-from .client import *
-from .http import *
-from .enums import *
-from .utils import *
+from .client import Client
+from .enums import Type, Category, Difficulty
