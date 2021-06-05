@@ -7,9 +7,10 @@ class Utils:
 
     def build_dict(self, item):
         """"Decodes a given query"""
-        result = {"response_code": item["response_code"], "results": []}
+        item.pop("response_code")
+        result = []
         for question in item["results"]:
-            result["results"].append({key: self.decode(value) for key, value in question.items()})
+            result.append({key: self.decode(value) for key, value in question.items()})
         return result
 
     def decode(self, item):
