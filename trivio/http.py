@@ -1,12 +1,13 @@
 import aiohttp
 
-from enums import Type, Category, Difficulty
+from .enums import Type, Category, Difficulty
 
 
 class Url:
     """"Represents a Url needed for making a request to the api"""
 
-    Base_url = "https://opentdb.com/api.php&encode=base64"
+    Base_url = "https://opentdb.com/api.php?encode=base64"
+    TOKEN_URL = "https://opentdb.com/api_token.php"
 
     def __init__(self, is_command: bool, _type: Type, amount: int = None, category: Category = None, difficulty: Difficulty = None):
         self.is_command = is_command
@@ -18,20 +19,19 @@ class Url:
     @property
     def url(self):
         #Returns the url as a string
-
-        url = self.Base_url
-
         if self.is_command:
-            url += f"?command={self._type}"
+            url = self.TOKEN_URL
+            url += f"?command={self._type.value}"
             return url
 
-        url += f"?type={self._type}"
+        url = self.Base_url
+        url += f"&type={self._type.value}"
         if self.amount:
-            url += f"?amount = {self.amount}"
+            url += f"&amount={self.amount}"
         if self.category:
-            url += f"?category={self.category}"
+            url += f"&category={self.category.value}"
         if self.difficulty:
-            url += f"?difficulty={self.difficulty}"
+            url += f"&difficulty={self.difficulty.value}"
         return url
 
 
@@ -49,28 +49,34 @@ class HttpClient:
         #Create a url object
         url = Url(True, Type.REQUEST)
         #get the token
-        return self.request(url)
+        result = await self.request(url)
+        return result["token"]
 
     async def request(self, url: Url):
-        url = url.url
+        _url = url.url
 
        #Check if we should use a token
-        if self.use_token:
-            self.token = await self.get_token()
-            if self.token:
-                url += f"?token={self.token}"
+        if not url.is_command:
+            if self.use_token:
+                self.token = await self.get_token()
+                if self.token:
+                    _url += f"&token={self.token}"
 
         #make the request
-        async with self._session.request("get", url) as r:
+        async with self._session.request("get", _url) as r:
             data = await r.json()
-            if 3 <= data["response_code"] <= 4:
-                self.token = await self.get_token()
-                return await self.request(url)
 
-            #Decode the data if necessary
-            if "response_message" in data:
-                return data
-            return self.utils.decode(data)
+        if data["response_code"] in (3, 4):
+            self.token = await self.get_token()
+            return await self.request(_url)
+
+        # Decode the data if necessary
+        if "response_message" in data:
+            return data
+
+        return self.utils.build_dict(data)
+
+
 
     async def close(self):
         # Close the ClientSession if existing
