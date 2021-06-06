@@ -5,7 +5,7 @@ import binascii
 class Utils:
     """"Class with helping functions"""
 
-    def build_dict(self, item):
+    def build_list(self, item) -> list:
         """"Decodes a given query"""
         item.pop("response_code")
         result = []
