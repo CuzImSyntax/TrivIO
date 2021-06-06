@@ -4,7 +4,7 @@ from .enums import Type, Category, Difficulty
 
 
 class Client:
-    """"Represents a TrivIO client to connect to the opentdb.com Trivia API.
+    """Represents a TrivIO client to connect to the opentdb.com Trivia API.
 
     There's one option that can be passed to the :class:`Client`.
     Parameters
@@ -30,7 +30,7 @@ class Client:
                       amount: int,
                       category: Category = None,
                       difficulty: Difficulty = None):
-        """"|coro|
+        """|coro|
 
         Makes a request to the trivia api and returns questions according to the given query
         Parameters
@@ -55,7 +55,7 @@ class Client:
         return await self.http.request(url)
 
     async def close(self):
-        """"|coro|
+        """|coro|
 
         Closes the Client and the connection to the api."""
         await self.http.close()

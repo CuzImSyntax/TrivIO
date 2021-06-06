@@ -3,10 +3,10 @@ import binascii
 
 
 class Utils:
-    """"Class with helping functions"""
+    """Class with helping functions"""
 
     def build_list(self, item) -> list:
-        """"Decodes a given query"""
+        """Decodes a given query"""
         item.pop("response_code")
         result = []
         for question in item["results"]:
@@ -24,7 +24,7 @@ class Utils:
             return {key: self.decode(value) for key, value in item.items()}
 
     def _decode(self, item):
-        """"Decodes a base64 string to an utf8 string"""
+        """Decodes a base64 string to an utf8 string"""
         try:
             return base64.b64decode(item).decode("utf8")
         except binascii.Error:

@@ -4,7 +4,7 @@ from .enums import Type, Category, Difficulty
 
 
 class Url:
-    """"Represents a Url needed for making a request to the api
+    """Represents a Url needed for making a request to the api
 
     Parameters
         -----------
@@ -54,7 +54,7 @@ class Url:
 
 
 class HttpClient:
-    """"Represents an HTTP client to send requests to the Open Trivia DB
+    """Represents an HTTP client to send requests to the Open Trivia DB
 
     Parameters
         -----------
