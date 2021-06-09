@@ -13,12 +13,12 @@ cd TrivIO
 python setup.py install
 ```
 
-##Docs
+## Docs
 Im currently working on the documentation.
 
 It will probably be available in a few weeks.
 
-##Simple Example
+## Simple Example
 
 ```python
 import trivio
