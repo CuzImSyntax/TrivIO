@@ -4,12 +4,16 @@ __all__ = ["Type", "Category", "Difficulty"]
 
 
 class Type(Enum):
+    """"The Different Types of questions, to get questions from."""
+
     MULTIPLE_CHOICE = "multiple"
     TRUE_FALSE = "boolean"
     REQUEST = "request"
 
 
 class Category(Enum):
+    """"The Different Categories, to get questions from."""
+
     ALL = 0
     GENERAL_KNOWLEDGE = 9
     BOOKS = 10
@@ -38,6 +42,8 @@ class Category(Enum):
 
 
 class Difficulty(Enum):
+    """"The Different Difficulties, to get questions from."""
+
     EASY = "easy"
     MEDIUM = "medium"
     HARD = "hard"
