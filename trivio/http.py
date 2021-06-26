@@ -1,13 +1,13 @@
 import aiohttp
 
 from .enums import Type, Category, Difficulty
+from .exceptions import NoResultFound, InvalidParameter
 
 
 class Url:
     """Represents a Url needed for making a request to the api
 
-    Parameters
-        -----------
+    Parameters:
         is_command: :class:`bool`
             Whether the Url should be for a command call.
         _type: :class:`Type`
@@ -56,8 +56,7 @@ class Url:
 class HttpClient:
     """Represents an HTTP client to send requests to the Open Trivia DB
 
-    Parameters
-        -----------
+    Parameters:
         utils: :class:`.Utils`
             A instance of the Utils class
         use_token: Optional[:class:`bool`]
@@ -84,15 +83,13 @@ class HttpClient:
 
         Makes a http request to the opentdb api.
 
-        Parameters
-        -----------
-        url: :class:`Url`
-            The url object to make the request with.
+        Parameters:
+            url: :class:`Url`
+                The url object to make the request with.
 
-        Returns
-        -----------
-        :class:`list`
-            The requested questions in a list.
+        Returns:
+            :class:`list`
+                The requested questions in a list.
         """
         _url = url.url
 
@@ -109,9 +106,9 @@ class HttpClient:
 
         #Cheking the response codes from the api
         if data["response_code"] == 1:
-            pass #ToDo raise No Results Could not return results. The API doesn't have enough questions for your query.
+            raise NoResultFound
         elif data["response_code"] == 2:
-            pass #ToDo raise  Invalid Parameter Contains an invalid parameter. Arguments passed in aren't valid.
+            raise InvalidParameter
         elif data["response_code"] in (3, 4):
             self.token = await self.get_token()
             return await self.request(_url)
