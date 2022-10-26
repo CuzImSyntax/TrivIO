@@ -1,5 +1,5 @@
 from .http import HttpClient, Url
-from .utils import Utils
+from .models import Response
 from .enums import Type, Category, Difficulty
 
 
@@ -7,6 +7,7 @@ class Client:
     """Represents a TrivIO client to connect to the opentdb.com Trivia API.
 
     There's one option that can be passed to the :class:`Client`.
+
     Parameters
     -----------
     use_token: Optional[:class:`bool`]
@@ -20,19 +21,18 @@ class Client:
     def __init__(self,
                  use_token: bool = False):
 
-        self.use_token = use_token
-
-        self.utils = Utils()
-        self.http = HttpClient(self.utils, self.use_token)
+        self.use_token: bool = use_token
+        self.http: HttpClient = HttpClient(self.use_token)
 
     async def request(self,
                       _type: Type,
                       amount: int,
                       category: Category = None,
-                      difficulty: Difficulty = None):
+                      difficulty: Difficulty = None) -> Response:
         """|coro|
 
         Makes a request to the trivia api and returns questions according to the given query
+
         Parameters
         -----------
         _type: :class:`Type`
@@ -50,7 +50,7 @@ class Client:
             The requested questions in a list.
         """
 
-        url = Url(False, _type, amount, category, difficulty)
+        url: Url = Url(False, _type, amount, category, difficulty)
 
         return await self.http.request(url)
 

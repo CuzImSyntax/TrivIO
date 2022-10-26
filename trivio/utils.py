@@ -5,13 +5,13 @@ import binascii
 class Utils:
     """Class with helping functions"""
 
-    def build_list(self, item) -> list:
+    def build_list(self, item) -> dict:
         """Decodes a given query"""
-        item.pop("response_code")
-        result = []
+        result: list = []
         for question in item["results"]:
             result.append({key: self.decode(value) for key, value in question.items()})
-        return result
+        item["results"] = result
+        return item
 
     def decode(self, item):
         if isinstance(item, int):

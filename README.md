@@ -26,10 +26,12 @@ import asyncio
 
 async def main():
     
-    client = trivio.Client(use_token=True)
-    questions = await client.request(trivio.Type.MULTIPLE_CHOICE, 1, trivio.Category.ALL, trivio.Difficulty.EASY)
+    client: trivio.Client = trivio.Client(use_token=True)
+    questions: trivio.Response = await client.request(trivio.Type.MULTIPLE_CHOICE, 1, trivio.Category.ALL, trivio.Difficulty.EASY)
     await client.close()
-    print(questions)
+    if questions.results: 
+        print(questions.results[0].question)
+        print(questions.results[0].all_answers)
 
 asyncio.run(main())
 ```
