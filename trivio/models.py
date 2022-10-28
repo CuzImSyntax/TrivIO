@@ -7,11 +7,11 @@ class Response:
     """
     This object represents a response from the api.
 
-    Parameters:
+    Parameters
     -----------
     response_code: :class:`bool`
         The response code to indicate whether the results returned successfully.
-    results: List[:class:`Question`]
+    results: List[:class:`trivio.enums.Question`]
         The list of questions given by the result.
     token: :class:`str`
         The token returned by the request. This will mostly be None as this is only used for generating tokens.
@@ -32,17 +32,17 @@ class Question:
     """
     This object represents a single question from an api call.
 
-    Parameters:
+    Parameters
     -----------
     category: :class:`str`
         The category of the question.
-    type: :class:`Type`
+    type: :class:`trivio.enums.Type`
         The type of the question
-    difficulty: :class:`Difficulty`
+    difficulty: :class:`trivio.enums.Difficulty`
         The difficulty of this question.
-    correct_answer :class:`str`
+    correct_answer: :class:`str`
         The correct answer of the question.
-    wrong_answers List[:class:`str`]
+    wrong_answers: List[:class:`str`]
         The wrong answers to the question.
 
     """

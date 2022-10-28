@@ -6,15 +6,26 @@
 Welcome to TrivIO's documentation!
 ==================================
 
+TrivIO is an async opentdb.com API wrapper to make the interaction with the api as simple as possible.
+
+
+Information and documentation
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Setup:
+
+   installing
+   example
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: API reference:
 
-
+   trivio
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

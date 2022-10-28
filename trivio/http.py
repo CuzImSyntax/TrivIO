@@ -13,13 +13,13 @@ class Url:
     -----------
     is_command: :class:`bool`
         Whether the Url should be for a command call.
-    _type: :class:`Type`
+    _type: :class:`trivio.Type`
         Determines whether returned questions should be multiple choice or yes/no questions.
     amount: :class:`int`
         The number of questions that should be returned the number of returned questions must be between 1 and 50.
-    category: Optional[:class:`Category`]
+    category: Optional[:class:`trivio.Category`]
         The category of the returned questions. When leaving empty there will be questions from a random category.
-    difficulty: Optional[:class:`Difficulty`]
+    difficulty: Optional[:class:`trivio.Difficulty`]
         The difficulty of the returned questions. When leaving empty there will be questions from all difficulties.
     """
 
@@ -61,7 +61,7 @@ class HttpClient:
 
     Parameters:
     -----------
-    utils: :class:`.Utils`
+    utils: :class:`trivio.Utils`
         A instance of the Utils class
     use_token: Optional[:class:`bool`]
         Determines whether the client should use a session token or not.

@@ -19,9 +19,9 @@ class TokenEmpty(BaseError):
     """
     Raised when the token has returned all possible questions for the specified query. Resetting the token is necessary.
 
-    ..note::
+    .. note::
         This can also mean that there aren't enough results in the opentdb database. For some reason the API also raises
-        does not raise [:class:`NoResultFound`] in this case.
+        does not raise :class:`NoResultFound` in this case.
     """
     def __init__(self):
         message = "The token has returned all possible questions for the specified query. " \

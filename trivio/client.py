@@ -4,7 +4,8 @@ from .enums import Type, Category, Difficulty
 
 
 class Client:
-    """Represents a TrivIO client to connect to the opentdb.com Trivia API.
+    """
+    Represents a TrivIO client to connect to the opentdb.com Trivia API.
 
     There's one option that can be passed to the :class:`Client`.
 
@@ -13,10 +14,10 @@ class Client:
     use_token: Optional[:class:`bool`]
         Determines whether the client should use a session token or not.
         Session Tokens are unique keys that will help keep track of the questions the API has already retrieved.
-        By appending a Session Token to a API Call, the API will never give you the same question twice.
+        By appending a Session Token to an API Call, the API will never give you the same question twice.
         Over the lifespan of a Session Token, there will eventually reach a point where you have exhausted
         all the possible questions in the database. At this point the api will automatically create a new token for you.
-        """
+    """
 
     def __init__(self,
                  use_token: bool = False):
@@ -35,18 +36,18 @@ class Client:
 
         Parameters
         -----------
-        _type: :class:`Type`
+        _type: :class:`trivio.enums.Type`
             Determines whether returned questions should be multiple choice or yes/no questions.
         amount: :class:`int`
             The number of questions that should be returned the number of returned questions must be between 1 and 50.
-        category: Optional[:class:`Category`]
+        category: Optional[:class:`trivio.enums.Category`]
             The category of the returned questions. When leaving empty there will be questions from a random category.
-        difficulty: Optional[:class:`Difficulty`]
+        difficulty: Optional[:class:`trivio.enums.Difficulty`]
             The difficulty of the returned questions. When leaving empty there will be questions from all difficulties.
 
         Returns
         --------
-        :class:`list`
+        :class:`trivio.models.Response`
             The requested questions in a list.
         """
 
