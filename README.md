@@ -14,9 +14,7 @@ python setup.py install
 ```
 
 ## Docs
-Im currently working on the documentation.
-
-It will probably be available in a few weeks.
+- The docs are available [here](https://trivio.rtfd.io/).
 
 ## Simple Example
 
