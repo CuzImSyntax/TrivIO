@@ -6,8 +6,10 @@ with open('requirements.txt') as f:
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
+packages = ["trivio"]
+
 setuptools.setup(
-    name="TrivIO",
+    name="trivio",
     version="0.1",
     license="MIT",
     author="CuzImSyntax",
@@ -22,5 +24,6 @@ setuptools.setup(
         ],
     python_requires='>=3.7.0',
     install_requires=requirements,
+    packages=packages
 
 )
